@@ -1,0 +1,51 @@
+/*
+CSS RESET
+    1. Use a more-intuitive box-sizing model.
+    2. Remove default margin
+    
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+
+    5. Improve media defaults
+    6. Remove built-in form typography styles
+    7. Avoid text overflows
+    8. Create a root stacking context
+*/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+#root, #__next {
+    isolation: isolate;
+}
+
+/* END CSS RESET */
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+}
