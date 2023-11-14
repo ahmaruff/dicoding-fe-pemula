@@ -117,7 +117,7 @@ document.addEventListener(RENDER_EVENT, function (){
 function createNewBook() {
     const bookTitle = document.getElementById("inputBookTitle").value;
     const bookAuthor = document.getElementById("inputBookAuthor").value;
-    const bookYear = document.getElementById("inputBookYear").value;
+    const bookYear = Number(document.getElementById("inputBookYear").value);
     
     const generatedID = generateId();
     let checked = false;
