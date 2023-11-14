@@ -133,19 +133,6 @@ function createNewBook() {
 }
 
 
-const checkboxListener = document.getElementById("inputBookIsComplete");
-let checked = false;
-checkboxListener.addEventListener("change", function(){
-    if(checkboxListener.checked){
-        checked = true;
-        
-        document.getElementById("dibaca").innerText = "";
-    }else{
-        checked = false;
-        document.getElementById("dibaca").innerText = "Belum";
-    }
-});
-
 document.addEventListener("DOMContentLoaded", function(){
     const submitInsertBook = document.getElementById("createNewBook");
     
@@ -164,10 +151,15 @@ document.addEventListener("DOMContentLoaded", function(){
 // REMOVE BOOK
 function removeBook(bookId){
     const bookTarget = searchBook(bookId);
+    console.log(bookTarget);
     if(bookTarget === -1) return;
     let confirmation = confirm("Apakah Anda ingin Menghapus buku " + bookTarget.title + "?");
     if(confirmation == true){
-        books.splice(bookTarget, 1);
+        bookTargetIndex = books.findIndex(Object => {
+            return Object.id === bookTarget.id  
+        });
+        console.log(bookTargetIndex);
+        books.splice(bookTargetIndex, 1);
         alert("Buku Telah Dihapus");
     }
     
@@ -215,9 +207,35 @@ function searchBook(bookId){
 
 function searchBookByTitle(bookTitle){
     for(book of books){
-        if(book.title === bookTitle){
+        if(book.title.toLowerCase() === bookTitle.toLowerCase()){
             return book;
         }
     }
     return null;
 }
+
+function renderSearchBook(bookTitle){
+    const showBookDiv = document.getElementById("searchResult");
+    showBookDiv.innerHTML = "";
+    const book = searchBookByTitle(bookTitle);
+    if(book){    
+        const bookElement = renderBookItem(book);
+        showBookDiv.append(bookElement);
+        console.log(bookTitle + " Found!");
+    }else {
+        const notFoundElement = document.createElement("article");
+        notFoundElement.classList.add("book-item");
+        notFoundElement.innerHTML = "<h3>Book Not Found!!!</h3>";
+        showBookDiv.append(notFoundElement);
+        console.log("book not found");
+    }
+}
+
+
+const submitSearchBook = document.getElementById("searchBook");
+submitSearchBook.addEventListener("submit", function(event){
+    const bookTitle = document.getElementById("searchBookTitle").value;
+    console.log(bookTitle);
+    renderSearchBook(bookTitle);
+    event.preventDefault();
+});

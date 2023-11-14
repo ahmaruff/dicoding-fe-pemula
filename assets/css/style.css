@@ -152,6 +152,7 @@ article.box > h1 {
     padding: 0.5rem;
     border: 1px solid var(--rich-black);
     box-shadow: 3px 3px var(--rich-black);
+    margin-bottom: 10px;
 }
 
 .book-item > .action {
